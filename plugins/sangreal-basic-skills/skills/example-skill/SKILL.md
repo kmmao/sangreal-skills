@@ -1,6 +1,7 @@
 ---
 name: example-skill
-description: 这是一个示例技能，展示如何创建自定义 Claude 技能。当用户需要了解技能结构或创建新技能时使用。
+description: This skill should be used when the user wants to "创建新技能", "create a skill", "了解技能结构", "skill 示例", or needs guidance on how to build custom Claude skills and understand the skill development structure.
+version: 1.0.0
 ---
 
 # 示例技能

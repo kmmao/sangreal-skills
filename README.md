@@ -1,107 +1,279 @@
-# Sangreal Skills
+# Sangreal Skills Marketplace
 
-Sangreal 的自定义 Claude 技能集合。
+Sangreal 的 Claude Code 插件市场，包含实用的开发和生产力工具。
 
-## 项目结构
+## 📦 项目结构
 
 ```
-sangreal-skills/
+sangreal-skills/                    # Marketplace 根目录
 ├── .claude-plugin/
-│   └── marketplace.json      # 插件市场配置
-├── skills/                   # 技能库
-│   ├── example-skill/        # 示例技能
-│   └── git-commit/           # Git 提交助手
-├── spec/                     # 技能规范文档
-├── template/                 # 技能模板
-│   └── SKILL.md
-└── README.md
+│   └── marketplace.json            # Marketplace 配置（必需）
+├── plugins/                        # 插件目录
+│   └── sangreal-basic-skills/      # 基础技能插件
+│       ├── .claude-plugin/
+│       │   └── plugin.json         # 插件元数据
+│       ├── .mcp.json               # MCP 服务器配置
+│       ├── skills/                 # 自动触发技能
+│       │   ├── example-skill/
+│       │   └── git-commit/
+│       ├── commands/               # 斜杠命令
+│       │   ├── commit.md
+│       │   └── quick-fix.md
+│       ├── agents/                 # 智能代理
+│       │   ├── code-analyzer.md
+│       │   └── doc-generator.md
+│       └── README.md
+├── spec/                           # 开发规范文档
+├── template/                       # 插件模板
+└── README.md                       # 本文件
 ```
 
-## 安装方法
+## 🚀 快速开始
 
-### 从 GitHub 安装
+### 添加 Marketplace
 
-1. 添加 marketplace：
 ```bash
-/plugin marketplace add your-github-username/sangreal-skills
+# 添加这个 marketplace 到你的 Claude Code
+/plugin marketplace add allen/sangreal-skills
 ```
 
-2. 安装技能包：
+### 安装插件
+
+```bash
+# 从 marketplace 安装
+/plugin install sangreal-basic-skills@sangreal-skills
+
+# 或者本地开发安装
+/plugin install /Users/allen/Documents/GitHub/sangreal-skills
+```
+
+## 📚 可用插件
+
+### sangreal-basic-skills
+
+**基础技能合集** - 包含常用的开发和生产力工具
+
+**功能：**
+- ⚡ 2 个斜杠命令：`/commit`, `/quick-fix`
+- 🤖 2 个智能 Agent：代码分析、文档生成
+- 🔮 2 个自动技能：Git 提交助手、示例技能
+
+**安装：**
 ```bash
 /plugin install sangreal-basic-skills@sangreal-skills
 ```
 
-### 本地开发安装
+[查看详细文档](./plugins/sangreal-basic-skills/README.md)
+
+## 🛠️ 开发指南
+
+### 创建新插件
+
+1. **创建插件目录**
 
 ```bash
-/plugin install /path/to/sangreal-skills
+mkdir -p plugins/your-plugin-name/.claude-plugin
 ```
 
-## 可用技能
+2. **创建 plugin.json**
 
-### sangreal-basic-skills
-
-基础技能合集：
-
-- **example-skill**: 展示如何创建自定义 Claude 技能
-- **git-commit**: 智能 Git 提交助手，自动生成符合规范的 commit message
-
-## 创建新技能
-
-1. 从模板创建技能文件：
-```bash
-mkdir -p skills/your-skill-name
-cp template/SKILL.md skills/your-skill-name/SKILL.md
-```
-
-2. 编辑 `skills/your-skill-name/SKILL.md`：
-   - 修改 frontmatter 中的 `name` 和 `description`
-   - 编写简洁的执行指令（不是说明文档）
-   - 提供具体的使用示例
-
-3. 在 `.claude-plugin/marketplace.json` 中注册：
 ```json
 {
-  "skills": [
-    "./skills/your-skill-name"
+  "name": "your-plugin-name",
+  "description": "插件描述",
+  "author": {
+    "name": "Your Name",
+    "email": "your@email.com"
+  }
+}
+```
+
+3. **添加组件**
+
+```bash
+# 创建 skill
+mkdir -p plugins/your-plugin-name/skills/your-skill
+cp template/SKILL.md plugins/your-plugin-name/skills/your-skill/SKILL.md
+
+# 创建 command
+touch plugins/your-plugin-name/commands/your-command.md
+
+# 创建 agent
+touch plugins/your-plugin-name/agents/your-agent.md
+```
+
+4. **注册到 marketplace**
+
+编辑 `.claude-plugin/marketplace.json`：
+
+```json
+{
+  "plugins": [
+    {
+      "name": "your-plugin-name",
+      "description": "...",
+      "version": "1.0.0",
+      "author": {
+        "name": "Your Name",
+        "email": "your@email.com"
+      },
+      "source": "./plugins/your-plugin-name",
+      "category": "productivity"
+    }
   ]
 }
 ```
 
-4. 测试技能激活和执行
+### 组件开发规范
 
-## 技能文件格式
+#### Skills (自动触发技能)
 
-```markdown
+```yaml
 ---
 name: skill-name
-description: 清晰描述技能功能和使用场景
+description: This skill should be used when the user wants to "触发短语1", "触发短语2", or needs...
+version: 1.0.0
 ---
 
-# 技能名称
-
-[简短介绍]
-
-## 核心功能
-
-[执行步骤]
-
-## 示例
-
-[具体示例]
+# Skill 内容
 ```
 
-## 最佳实践
+**关键点：**
+- Description 必须用第三人称 `"This skill should be used when..."`
+- 用引号包裹具体的触发短语
+- 会根据对话内容自动激活
 
-- **简洁优先**：技能指令要直接可执行，避免冗长说明
-- **示例驱动**：通过示例展示用法，而不是长篇文字
-- **明确触发**：description 要准确描述何时激活此技能
-- **测试验证**：创建后在实际场景中测试技能是否正常工作
+#### Commands (斜杠命令)
 
-## 许可证
+```yaml
+---
+description: 命令简短描述
+argument-hint: <required-arg> [optional-arg]
+allowed-tools: Read, Bash, Edit
+---
+
+# Command 内容
+
+用户参数: $ARGUMENTS
+上下文注入: !`command`
+```
+
+**关键点：**
+- 用户通过 `/command-name` 手动调用
+- `$ARGUMENTS` 获取用户输入
+- `` !`command` `` 注入命令输出到上下文
+
+#### Agents (智能代理)
+
+```markdown
+| name | description | tools | model | color |
+| --- | --- | --- | --- | --- |
+| agent-name | Agent 描述 | Read, Write, Bash | sonnet | blue |
+
+[Agent 系统提示词...]
+```
+
+**关键点：**
+- 使用 Markdown 表格作为 frontmatter
+- 可选 model: haiku, sonnet, opus
+- 可选 color: red, blue, green, yellow, purple
+
+### Marketplace 配置字段
+
+```json
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "marketplace-name",
+  "description": "Marketplace 描述",
+  "owner": {
+    "name": "Owner Name",
+    "email": "owner@email.com"
+  },
+  "plugins": [
+    {
+      "name": "plugin-name",              // 必需：插件唯一标识
+      "description": "插件描述",           // 必需：简短描述
+      "version": "1.0.0",                 // 推荐：语义化版本号
+      "author": {                         // 推荐：作者信息
+        "name": "Author Name",
+        "email": "author@email.com"
+      },
+      "source": "./plugins/plugin-name",  // 必需：相对路径
+      "category": "productivity",         // 推荐：分类
+      "homepage": "https://...",          // 可选：主页链接
+      "tags": ["tag1", "tag2"],          // 可选：标签
+      "strict": false                     // 可选：严格模式
+    }
+  ]
+}
+```
+
+**Category 选项：**
+- `development` - 开发工具
+- `productivity` - 生产力工具
+- `testing` - 测试工具
+- `security` - 安全工具
+- `database` - 数据库工具
+- `deployment` - 部署工具
+- `monitoring` - 监控工具
+- `design` - 设计工具
+- `learning` - 学习工具
+
+## 📖 参考资源
+
+- [Claude Code 官方文档](https://code.claude.com/docs)
+- [官方插件仓库](https://github.com/anthropics/claude-plugins-official)
+- [插件开发工具包](https://github.com/anthropics/claude-plugins-official/tree/main/plugins/plugin-dev)
+- [Marketplace Schema](https://anthropic.com/claude-code/marketplace.schema.json)
+
+## 🎯 最佳实践
+
+### Plugin 设计
+- ✅ 每个插件专注一个领域
+- ✅ 提供清晰的文档和示例
+- ✅ 遵循官方命名规范
+- ✅ 包含 README.md
+- ❌ 避免功能重叠
+- ❌ 不要包含过多依赖
+
+### 组件设计
+- ✅ Skills 用于自动触发的通用能力
+- ✅ Commands 用于用户主动调用的操作
+- ✅ Agents 用于复杂的多步骤任务
+- ✅ 清晰的触发条件和参数说明
+- ❌ 避免过于复杂的逻辑
+
+### Marketplace 管理
+- ✅ 使用语义化版本号
+- ✅ 提供准确的分类标签
+- ✅ 保持插件更新
+- ✅ 及时处理 issues
+- ❌ 不要发布未测试的版本
+
+## 🤝 贡献
+
+欢迎贡献新插件或改进现有插件！
+
+### 贡献流程
+
+1. Fork 本仓库
+2. 创建插件分支：`git checkout -b plugin/your-plugin-name`
+3. 在 `plugins/` 目录下创建你的插件
+4. 更新 `.claude-plugin/marketplace.json`
+5. 提交 Pull Request
+
+### 插件审核标准
+
+- ✅ 功能完整且有用
+- ✅ 代码质量良好
+- ✅ 包含完整文档
+- ✅ 遵循官方规范
+- ✅ 通过测试验证
+
+## 📄 许可证
 
 Apache 2.0
 
-## 贡献
+---
 
-欢迎提交 Issue 和 Pull Request。
+**由 Claude Code 驱动** | [报告问题](https://github.com/allen/sangreal-skills/issues) | [贡献指南](./CONTRIBUTING.md)

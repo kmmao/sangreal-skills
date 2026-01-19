@@ -1,23 +1,22 @@
 {
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
   "name": "sangreal-skills",
+  "description": "Sangreal's custom plugins collection for Claude Code, including development tools and productivity enhancements",
   "owner": {
     "name": "Allen",
     "email": "allen@example.com"
   },
-  "metadata": {
-    "description": "Sangreal's custom skills collection for Claude",
-    "version": "1.0.0"
-  },
   "plugins": [
     {
       "name": "sangreal-basic-skills",
-      "description": "基础技能合集，包含常用的开发和生产力工具",
-      "source": "./",
-      "strict": false,
-      "skills": [
-        "./skills/example-skill",
-        "./skills/git-commit"
-      ]
+      "description": "基础技能合集，包含常用的开发和生产力工具，包括智能 Git 提交、代码分析、文档生成等功能",
+      "version": "1.0.0",
+      "author": {
+        "name": "Allen",
+        "email": "allen@example.com"
+      },
+      "source": "./plugins/sangreal-basic-skills",
+      "category": "productivity"
     }
   ]
 }

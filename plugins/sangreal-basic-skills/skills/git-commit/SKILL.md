@@ -1,6 +1,7 @@
 ---
 name: git-commit
-description: 智能 Git 提交助手。当用户需要提交代码、生成 commit message 或进行版本控制操作时使用。支持分析代码变更、生成符合规范的提交信息、暂存文件等 Git 工作流。
+description: This skill should be used when the user wants to "提交代码", "commit", "生成 commit message", "git 提交", or needs help with Git version control operations including analyzing code changes, creating conventional commit messages, and staging files.
+version: 1.0.0
 ---
 
 # Git 智能提交助手

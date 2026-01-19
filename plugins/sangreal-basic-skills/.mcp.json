@@ -1,0 +1,9 @@
+{
+  "comment": "MCP (Model Context Protocol) 服务器配置示例",
+  "note": "根据实际需要添加 MCP 服务器。常见类型：http, stdio, sse",
+  "example-http-server": {
+    "type": "http",
+    "url": "https://mcp.example.com/api",
+    "disabled": true
+  }
+}
