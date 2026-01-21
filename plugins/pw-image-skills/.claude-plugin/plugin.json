@@ -1,0 +1,18 @@
+{
+  "name": "pw-image-skills",
+  "description": "AI 图像生成工作流技能集 - 包含文生图、图生图、批量生成和小红书风格图片生成",
+  "version": "1.0.0",
+  "author": {
+    "name": "牟勇",
+    "email": "contact@plugins-world.cn"
+  },
+  "maintainer": {
+    "name": "Sangreal",
+    "note": "从 plugins-world/pw-skills 仓库同步"
+  },
+  "upstream": {
+    "repository": "https://github.com/plugins-world/pw-skills",
+    "lastSync": "2026-01-22",
+    "syncNote": "初始导入版本"
+  }
+}

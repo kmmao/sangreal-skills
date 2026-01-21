@@ -65,6 +65,36 @@ sangreal-skills/                    # Marketplace 根目录
 
 [查看详细文档](./plugins/sangreal-basic-skills/README.md)
 
+---
+
+### pw-image-skills
+
+**AI 图像生成工作流** - 从 [plugins-world/pw-skills](https://github.com/plugins-world/pw-skills) 同步
+
+**功能：**
+- 🎨 文生图、图生图、批量生成
+- 📱 小红书风格图片生成
+- 🔗 图片拼接和长图制作
+- 📊 基础 PPT 生成支持
+
+**技能列表：**
+- `pw-image-generation`: AI 图像生成工作流
+- `pw-redbook-image`: 小红书风格提示词模板
+
+**安装：**
+```bash
+/plugin install pw-image-skills@sangreal-skills
+
+# 安装依赖
+cd ~/.claude/plugins/pw-image-skills/skills/pw-image-generation
+npm install
+```
+
+**原作者**: 牟勇 | [ai-router.plugins-world.cn](https://ai-router.plugins-world.cn)
+
+[查看详细文档](./plugins/pw-image-skills/README.md) | [更新说明](./plugins/pw-image-skills/UPSTREAM.md)
+
+
 ## 🛠️ 开发指南
 
 ### 创建新插件

@@ -17,6 +17,28 @@
       },
       "source": "./plugins/sangreal-basic-skills",
       "category": "productivity"
+    },
+    {
+      "name": "pw-image-skills",
+      "description": "AI 图像生成工作流技能集 - 包含文生图、图生图、批量生成和小红书风格图片生成功能",
+      "version": "1.0.0",
+      "author": {
+        "name": "牟勇",
+        "email": "contact@plugins-world.cn"
+      },
+      "maintainer": {
+        "name": "Sangreal",
+        "upstream": "https://github.com/plugins-world/pw-skills"
+      },
+      "source": "./plugins/pw-image-skills",
+      "category": "design",
+      "tags": [
+        "ai",
+        "image-generation",
+        "xiaohongshu",
+        "design"
+      ],
+      "homepage": "https://github.com/plugins-world/pw-skills"
     }
   ]
 }
